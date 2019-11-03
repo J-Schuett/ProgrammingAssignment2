@@ -1,7 +1,16 @@
-## Put comments here that give an overall description of what your
-## functions do
+## With the two following functions we provide the functionality to
+## combine an invertible matrix with a cache of its inverse matrix.
+## The first function makeCacheMatrix enables us to set and get the 
+## matrix and its inverse matrix. The second function cacheSolve
+## can then calculate and set the inverse matrix or, if it was 
+## already cached, retrieve it.
 
-## Write a short comment describing this function
+## The function, makeCacheMatrix creates a special "matrix", 
+## which is really a list containing a function to
+## 1. set a matrix
+## 2. get the matrix
+## 3. set the inverse matrix
+## 4. get the inverse matrix
 
 makeCacheMatrix <- function(x = matrix()) {
     inverse <- NULL
@@ -18,13 +27,17 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## The function cacheSolve returns the inverse of a "matrix" as given by
+## makeCacheMatrix. If the inverse matrix was cached before,
+## it is simply returned.
+## Otherwise the inverse is calculated and cached in the "matrix".
+## The "matrix" is assumed to be invertible.
 
 cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
     A_inv <- x$getinverse()
     if(!is.null(A_inv)) {
-        message("getting cached data")
+        message("getting cached inverse matrix")
         return(A_inv)
     }
     A <- x$get()
